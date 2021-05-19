@@ -3,6 +3,7 @@ import time
 from random import randint
 
 
+# functie care afiseaza tabla curenta de joc
 def print_board(tictactoe_board):
     print('\t-+-+-')
     for i in range(1, 10):
@@ -15,6 +16,7 @@ def print_board(tictactoe_board):
             print('\t-+-+-')
 
 
+# fucntie care face verificarile necesare pentru stabilirea unui castigator
 def verify_winner(tictactoe_board):
     # verificare pe randuri
     for i in range(1, 10, 3):
@@ -35,8 +37,11 @@ def verify_winner(tictactoe_board):
         return False  # inca nu exista un castigtor
 
 
+# functia care porneste un joc de X si 0
 def start_game():
-    # am folosit un dictionar in care cheai reprezinta pozitia elemetelor pe tabla de joc
+    player1 = input("X - Numele tau este: ")
+    player2 = input("0 - Numele tau este: ")
+    # am folosit un dictionar in care cheia reprezinta pozitia elemetelor pe tabla de joc
     # initial, fiecare valoare este un space, pentru a simula faptul ca tabla de joc este goala
     # in momentul in care un player doreste sa completeze o casuta la o anumnita pozitie, se va actualiza tictactoeBoard
     tictactoe_board = {
@@ -58,9 +63,9 @@ def start_game():
     if first_turn == 1:
         # daca la generarea random, se returneaza 1, atunci playerul '0' va incepe jocul, altfel va ramane 'X'
         turn = '0'
-        print('Playerul ** 0 ** incepe jocul!')
+        print(f'Playerul ** 0 ** ({player2}) incepe jocul!')
     else:
-        print('Playerul ** X ** incepe jocul!')
+        print(f'Playerul ** X ** ({player1}) incepe jocul!')
     time.sleep(2)
 
     # afisarea pozitiilor pe tabla, pentru ca playerii sa stie unde sa faca actiunile
@@ -82,7 +87,7 @@ def start_game():
     while no_of_turns < 9:
         # afisam tabla de joc curenta si playerul care trebuie sa isi plaseze semnul
         print_board(tictactoe_board)
-        print("Este randul playerului: " + turn)
+        print(f"Este randul playerului: {turn} / {player1 if turn == 'X' else player2}")
 
         location = int(input("Care este pozitie unde doresti sa asezi piesa? [1-9]: "))
 
@@ -91,7 +96,7 @@ def start_game():
             print('********************************************')
             print('*Introdu doar valori cuprinse intre 1 si 9!*')
             print('********************************************')
-            time.sleep(3)
+            time.sleep(2)
             continue  # ne intoarcem la inceputul instructiunii while (sarim peste verificari)
 
         # verificam daca pozitia este ocupata sau nu
@@ -102,7 +107,7 @@ def start_game():
             print('************************************')
             print("*Pozitia curenta este deja ocupata!*")
             print('************************************')
-            time.sleep(3)
+            time.sleep(2)
             continue  # ne intoarcem la inceputul instructiunii while (sarim peste verificari)
 
         # dupa 5 ture, exista posibilitatea sa avem un castigator, facem verificarile aferente
@@ -110,7 +115,7 @@ def start_game():
             print('\n\n*******************************************')
             print_board(tictactoe_board)
             print('*******************************************')
-            print('Avem un castigator: ' + turn + '!!!')
+            print(f"Avem un castigator: {turn}!!! -- {player1 if turn == 'X' else player2}")
             print('*******************************************')
             winner = True
             break
@@ -128,6 +133,14 @@ def start_game():
         print('*******************************************')
         print('Avem egalitate!!!')
         print('*******************************************')
+
+    time.sleep(2)
+    # restart la joc, in caz ca se doreste
+    if input('Doriti sa mai jucati? (0/1): ') == '1':
+        start_game()
+    else:
+        print("Bye!")
+        time.sleep(2)
 
 
 start_game()
