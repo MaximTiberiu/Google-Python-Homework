@@ -37,10 +37,58 @@ def verify_winner(tictactoe_board):
         return False  # inca nu exista un castigtor
 
 
+# functie care schimba jucatorul
+def change_turn(turn):
+    if turn == 'X':
+        return '0'
+    return 'X'
+
+
+# fucntie care afiseaza tabla initiala
+def print_init_board(tictactoe_board):
+    print('\n*******************************************')
+    print("Tabla initiala...")
+    print_board(tictactoe_board)
+    print('*******************************************')
+
+
+# functie care afiseaza pozitiile de joc
+def print_positions():
+    print('*******************************************')
+    print('''Acestea sunt pozitiile pe tabla de joc...
+        \t-+-+-
+        \t1|2|3
+        \t-+-+-
+        \t4|5|6
+        \t-+-+-
+        \t7|8|9
+        \t-+-+-''')
+    print('*******************************************')
+
+
+# functie care afiseaza castigatorul
+def print_winner(tictactoe_board, turn, player1, player2):
+    print('\n\n*******************************************')
+    print_board(tictactoe_board)
+    print('*******************************************')
+    print(f"Avem un castigator: {turn}!!! -- {player1 if turn == 'X' else player2}")
+    print('*******************************************')
+
+
+# functie care afiseaza cazul de egalitate
+def print_tie(tictactoe_board):
+    print('\n\n********************************************')
+    print_board(tictactoe_board)
+    print('*******************************************')
+    print('Avem egalitate!!!')
+    print('*******************************************')
+
+
 # functia care porneste un joc de X si 0
 def start_game():
     player1 = input("X - Numele tau este: ")
     player2 = input("0 - Numele tau este: ")
+
     # am folosit un dictionar in care cheia reprezinta pozitia elemetelor pe tabla de joc
     # initial, fiecare valoare este un space, pentru a simula faptul ca tabla de joc este goala
     # in momentul in care un player doreste sa completeze o casuta la o anumnita pozitie, se va actualiza tictactoeBoard
@@ -51,11 +99,8 @@ def start_game():
     }
 
     # afisarea tablei de joc goala
-    print('\n*******************************************')
-    print("Tabla initiala...")
-    print_board(tictactoe_board)
-    print('*******************************************')
-    time.sleep(2)
+    print_init_board(tictactoe_board)
+    time.sleep(3)
 
     # stabilirea playerului care va incepe jocul
     turn = 'X'  # in variabila turn stochez playerul care urmeaza sa actioneze pe tabla de joc
@@ -66,20 +111,11 @@ def start_game():
         print(f'Playerul ** 0 ** ({player2}) incepe jocul!')
     else:
         print(f'Playerul ** X ** ({player1}) incepe jocul!')
-    time.sleep(2)
+    time.sleep(3)
 
     # afisarea pozitiilor pe tabla, pentru ca playerii sa stie unde sa faca actiunile
-    print('*******************************************')
-    print('''Acestea sunt pozitiile pe tabla de joc...
-    \t-+-+-
-    \t1|2|3
-    \t-+-+-
-    \t4|5|6
-    \t-+-+-
-    \t7|8|9
-    \t-+-+-''')
-    print('*******************************************')
-    time.sleep(2)
+    print_positions()
+    time.sleep(3)
 
     no_of_turns = 0  # numarul de mutari facute
     winner = False  # stabileste daca exista un castigator sau nu
@@ -96,7 +132,7 @@ def start_game():
             print('********************************************')
             print('*Introdu doar valori cuprinse intre 1 si 9!*')
             print('********************************************')
-            time.sleep(2)
+            time.sleep(3)
             continue  # ne intoarcem la inceputul instructiunii while (sarim peste verificari)
 
         # verificam daca pozitia este ocupata sau nu
@@ -107,40 +143,29 @@ def start_game():
             print('************************************')
             print("*Pozitia curenta este deja ocupata!*")
             print('************************************')
-            time.sleep(2)
+            time.sleep(3)
             continue  # ne intoarcem la inceputul instructiunii while (sarim peste verificari)
 
         # dupa 5 ture, exista posibilitatea sa avem un castigator, facem verificarile aferente
         if no_of_turns >= 5 and verify_winner(tictactoe_board):
-            print('\n\n*******************************************')
-            print_board(tictactoe_board)
-            print('*******************************************')
-            print(f"Avem un castigator: {turn}!!! -- {player1 if turn == 'X' else player2}")
-            print('*******************************************')
+            print_winner(tictactoe_board, turn, player1, player2)
             winner = True
             break
 
         # schimbam playerul
-        if turn == 'X':
-            turn = '0'
-        else:
-            turn = 'X'
+        turn = change_turn(turn)
 
     # daca se iese din while fara un castigator, rezulta egalitate
     if not winner:
-        print('\n\n********************************************')
-        print_board(tictactoe_board)
-        print('*******************************************')
-        print('Avem egalitate!!!')
-        print('*******************************************')
+        print_tie(tictactoe_board)
 
-    time.sleep(2)
+    time.sleep(3)
     # restart la joc, in caz ca se doreste
     if input('Doriti sa mai jucati? (0/1): ') == '1':
         start_game()
     else:
         print("Bye!")
-        time.sleep(2)
+        time.sleep(3)
 
 
 start_game()
