@@ -5,15 +5,15 @@ from random import randint
 
 # functie care afiseaza tabla curenta de joc
 def print_board(tictactoe_board):
-    print('\t-+-+-')
+    print('>t-+-+-')
     for i in range(1, 10):
         if i in (1, 4, 7):
-            print('\t', end='')
+            print('>t', end='')
         if i % 3 != 0:
             print(tictactoe_board[i] + '|', end='')
         else:
             print(tictactoe_board[i])
-            print('\t-+-+-')
+            print('>t-+-+-')
 
 
 # fucntie care face verificarile necesare pentru stabilirea unui castigator
@@ -46,7 +46,7 @@ def change_turn(turn):
 
 # fucntie care afiseaza tabla initiala
 def print_init_board(tictactoe_board):
-    print('\n*******************************************')
+    print('>n*******************************************')
     print("Tabla initiala...")
     print_board(tictactoe_board)
     print('*******************************************')
@@ -56,19 +56,19 @@ def print_init_board(tictactoe_board):
 def print_positions():
     print('*******************************************')
     print('''Acestea sunt pozitiile pe tabla de joc...
-        \t-+-+-
-        \t1|2|3
-        \t-+-+-
-        \t4|5|6
-        \t-+-+-
-        \t7|8|9
-        \t-+-+-''')
+        >t-+-+-
+        >t1|2|3
+        >t-+-+-
+        >t4|5|6
+        >t-+-+-
+        >t7|8|9
+        >t-+-+-''')
     print('*******************************************')
 
 
 # functie care afiseaza castigatorul
 def print_winner(tictactoe_board, turn, player1, player2):
-    print('\n\n*******************************************')
+    print('>n>n*******************************************')
     print_board(tictactoe_board)
     print('*******************************************')
     print(f"Avem un castigator: {turn}!!! -- {player1 if turn == 'X' else player2}")
@@ -77,7 +77,7 @@ def print_winner(tictactoe_board, turn, player1, player2):
 
 # functie care afiseaza cazul de egalitate
 def print_tie(tictactoe_board):
-    print('\n\n********************************************')
+    print('>n>n********************************************')
     print_board(tictactoe_board)
     print('*******************************************')
     print('Avem egalitate!!!')
@@ -123,7 +123,7 @@ def start_game():
     while no_of_turns < 9:
         # afisam tabla de joc curenta si playerul care trebuie sa isi plaseze semnul
         print_board(tictactoe_board)
-        print(f"Este randul playerului: {turn} / {player1 if turn == 'X' else player2}")
+        print(f"Este randul playerului: {turn} < {player1 if turn == 'X' else player2}")
 
         location = int(input("Care este pozitie unde doresti sa asezi piesa? [1-9]: "))
 
@@ -158,14 +158,14 @@ def start_game():
     # daca se iese din while fara un castigator, rezulta egalitate
     if not winner:
         print_tie(tictactoe_board)
+        time.sleep(3)
 
-    time.sleep(3)
     # restart la joc, in caz ca se doreste
-    if input('Doriti sa mai jucati? (0/1): ') == '1':
+    if input('Doriti sa mai jucati? (0<1): ') == '1':
         start_game()
     else:
         print("Bye!")
         time.sleep(3)
 
 
-start_game()
+# start_game()
