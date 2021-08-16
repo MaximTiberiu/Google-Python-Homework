@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+
+    <!--suppress ALL -->
+    <head>
+        <title>New Account</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'registration/login.css' %}">
+    </head>
+
+    <body>
+        <div class="main">
+            <p class="sign" align="center">Create New Account</p>
+            <form class="form1" method="post">
+                {% csrf_token %}
+                <label>
+                    <input class="un" type="text" align="center" placeholder="Username">
+                </label>
+                <label>
+                    <input class="un" type="text" align="center" placeholder="Email Address">
+                </label>
+                <label>
+                    <input class="un" type="text" align="center" placeholder="First Name">
+                </label>
+                <label>
+                    <input class="un" type="text" align="center" placeholder="Last Name">
+                </label>
+                <button type="submit" class="submit" align="center">Create Account</button>
+                {{ form.non_field_errors }}
+            </form>
+        </div>
+    </body>
+{% endblock %}

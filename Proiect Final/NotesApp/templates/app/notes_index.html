@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+
+    <!--suppress ALL -->
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'app/app.css' %}">
+    </head>
+    <body>
+        {% if  note_list.count  %}
+        <table id="notes">
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Title</th>
+                    <th>Date&Time</th>
+                    <th>Content</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in note_list %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.datetime|date:"D d M Y" }} {{ item.datetime|time:"H:i" }}</td>
+                        <td>{{ item.content }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <center>
+                <img src="../../static/app/oops.png" alt="OOPS" width="600">
+            </center>
+    {% endif %}
+    </body>
+{% endblock %}

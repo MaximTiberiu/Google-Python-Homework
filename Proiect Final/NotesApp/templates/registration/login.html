@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+
+    <!--suppress ALL -->
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'registration/login.css' %}">
+    </head>
+
+    <body>
+        <div class="main">
+            <p class="sign" align="center">Sign in</p>
+            <form class="form1" method="post">
+                {% csrf_token %}
+                <label>
+                    <input class="un" type="text" align="center" placeholder="Username">
+                </label>
+                <label>
+                    <input class="pass" type="password" align="center" placeholder="Password">
+                </label>
+                <button type="submit" class="submit" align="center">Sign in</button>
+                <p class="forgot" align="center"><a href="{% url 'user:new_account' %}">Create New Account</a></p>
+                {{ form.non_field_errors }}
+            </form>
+        </div>
+    </body>
+{% endblock %}

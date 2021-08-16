@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>NotesApp</title>
+        <meta name="description" content="A Basic Notes App.">
+        <meta name="author" content="Tiberiu Maxim">
+
+        <meta property="og:title" content="A Basic Notes App.">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="http://127.0.0.1:8000/">
+        <meta property="og:description" content="A Basic Notes App.">
+{#      <meta property="og:image" content="image.png">#}
+    </head>
+    <body>
+        <div class="topnav">
+            <a class="active" href="#home">My Notes</a>
+            <a href="#news">Create New Note</a>
+            <a href="#contact">My Profile</a>
+            <a href="#about">Log out</a>
+        </div>
+        <div>
+                {% block content %}
+                {% endblock %}
+        </div>
+    </body>
+</html>
